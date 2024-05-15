@@ -1,5 +1,5 @@
 const fs = require("fs").promises;
-const parseBody = require("../http-utils/parse-body");
+const parseBody = require("../AppModules/http-utils/parse-body");
 const { config, createRating, updateRating } = require("../dataset/rating");
 
 async function voteRouteController(req, res) {

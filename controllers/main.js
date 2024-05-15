@@ -1,6 +1,6 @@
 const path = require("path");
-const staticFile = require("../http-utils/static-file");
-const mimeTypes = require("../http-utils/mime-types");
+const staticFile = require("../AppModules/http-utils/static-file");
+const mimeTypes = require("../AppModules/http-utils/mime-types");
 
 async function defaultRouteController(res, url) {
   const extname = String(path.extname(url)).toLowerCase();

@@ -1,8 +1,8 @@
 const http = require("http");
-const defaultRouteController = require("./AppModules/controllers/main");
-const gameRouteController = require("./AppModules/controllers/game");
-const voteRouteController = require("./AppModules/controllers/vote");
-const staticFile = require("../imba/AppModules/http-utils/static-file");
+const defaultRouteController = require("./controllers/main");
+const gameRouteController = require("./controllers/game");
+const voteRouteController = require("./controllers/vote");
+const staticFile = require("./AppModules/http-utils/static-file");
 const server = http.createServer((req, res) => {
   const url = req.url;
   switch (url) {
@@ -21,4 +21,4 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.lsten(3005);
+server.listen(3005);

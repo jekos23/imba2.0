@@ -1,15 +1,13 @@
-const path = require("path");
-const staticFile = require("../AppModules/http-utils/static-file");
-const mimeTypes = require("../AppModules/http-utils/mime-types");
+const { getData, endpoints } = require("../appModules/api");
+const staticFile = require("../appModules/http-utils/static-file");
+const makeRatingFile = require("../appModules/rating/rating-file");
+const config = require("../appModules/rating/config");
 
-async function defaultRouteController(res, url) {
-  const extname = String(path.extname(url)).toLowerCase();
-  if (extname in mimeTypes) {
-    staticFile(res, url, extname);
-  } else {
-    res.statusCode = 404;
-    res.end("Not Found");
-  }
+
+async function mainRouteController(res, publicUrl, extname) {
+  const data = await getData(endpoints.games);
+  await makeRatingFile(config.PATH_TO_RATING_FILE, data);
+  res.statusCode = 200;
+  staticFile(res, publicUrl, extname);
 }
-
-module.exports = defaultRouteController;
+module.exports = mainRouteController;

@@ -1,14 +1,17 @@
 const http = require("http");
-const defaultRouteController = require("./controllers/main");
+
+const  mainRouteController  = require("./controllers/main");
+const defaultRouteController = require("./controllers/default");
 const gameRouteController = require("./controllers/game");
 const voteRouteController = require("./controllers/vote");
-const staticFile = require("./AppModules/http-utils/static-file");
+
+const PORT = 3005;
+
 const server = http.createServer((req, res) => {
   const url = req.url;
   switch (url) {
     case "/":
-      res.statusCode = 200;
-      staticFile(res, "/index.html", ".html");
+      mainRouteController(res, "/index.html", ".html");
       break;
     case "/game":
       gameRouteController(res);
@@ -18,7 +21,8 @@ const server = http.createServer((req, res) => {
       break;
     default:
       defaultRouteController(res, url);
+      break;
   }
 });
 
-server.listen(3005);
+server.listen(PORT);
